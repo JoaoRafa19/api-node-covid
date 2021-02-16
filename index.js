@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 
-app.listen(process.env.PORT||3000, ()=>{
+app.listen(3000, ()=>{
   console.log('servidor rodando');
 });
 
@@ -23,7 +23,7 @@ app.get('/covid/lastsixmonth', async (req,res)=>{
   try{
     const date = format(subDays(new Date(), 180), 'yyyy-dd-MM');
     const today = format(new Date(), 'yyyy-dd-MM');
-    const uri = `/country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
+    const uri = `country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
     const {data}= await api.get(uri);
     return res.send(data);
   }catch(e){
@@ -35,7 +35,7 @@ app.get('/covid/status', async (req,res)=>{
   try{
     const date = format(subDays(new Date(), 180), 'yyyy-dd-MM');
     const today = format(new Date(), 'yyyy-dd-MM');
-    const uri = `/total/country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
+    const uri = `total/country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
     const {data}= await api.get(uri);
     return res.send(data);
   }catch(e){
@@ -43,17 +43,16 @@ app.get('/covid/status', async (req,res)=>{
   }
 });
 
-app.get('/covid/slasttwoweaks', async (req,res)=>{
-  try{
+app.get('/covid/lasttwoweaks', async (req,res)=>{
+  
     const date = format(subDays(new Date(), 14), 'yyyy-dd-MM');
     const today = format(new Date(), 'yyyy-dd-MM');
-    const uri = `/total/country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
+    const uri = `country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`
     const {data}= await api.get(uri);
+    
     return res.send(data);
 
-  }catch(e){
-    res.send({erro:e.message});
-  }
+ 
 });
 
 
@@ -61,7 +60,7 @@ app.get('/status/confirmed', async (req,res)=>{
   try{
     const date = format(subDays(new Date(), 180), 'yyyy-dd-MM');
     const today = format(new Date(), 'yyyy-dd-MM');
-    const uri = `/total/country/brazil/status/confirmed?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
+    const uri = `total/country/brazil/status/confirmed?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
     const {data}= await api.get(uri);
     return res.send(data);
   }catch(e){
