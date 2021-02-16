@@ -4,9 +4,11 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const api = require('./api');
+const cors = require('cors');
 
 
 app.use(express.json());
+app.use(cors());
 
 app.listen(8001, ()=>{
   console.log('servidor rodando');
