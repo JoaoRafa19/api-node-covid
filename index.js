@@ -10,7 +10,8 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors());
 
-app.listen(8001, ()=>{
+
+app.listen(3000, ()=>{
   console.log('servidor rodando');
 });
 
