@@ -69,14 +69,12 @@ app.get('/status/confirmed', async (req,res)=>{
 });
 
 app.get('/info', async (req,res)=>{
-  try{ 
+  
     response.send({
       "title":"Covid 19 Status API",
       "powered_by":"Python/Flask",
       "description":"API for get covid19 status",
       "owner":'João Pedro Rafael Santos Silva'
     });
-  }catch(e){
-    res.send({erro:e.message});
-  }
+  
 });
