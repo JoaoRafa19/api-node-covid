@@ -2,16 +2,17 @@ const {format, subDays} = require('date-fns');
 const { response } = require('express');
 const express = require('express');
 const app = express();
-const router = express.Router();
 const api = require('./api');
 const cors = require('cors');
+const api2 = require('./api2');
+const _firebase = require('./firebase/setData');
 
 
 app.use(express.json());
 app.use(cors());
 
 
-app.listen(process.env.PORT||3000, ()=>{
+app.listen(3000, ()=>{
   console.log('servidor rodando');
 });
 
@@ -37,6 +38,7 @@ app.get('/covid/status', async (req,res)=>{
     const today = format(new Date(), 'yyyy-dd-MM');
     const uri = `total/country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
     const {data}= await api.get(uri);
+    console.log(data);
     return res.send(data);
   }catch(e){
     res.send({erro:e.message});
@@ -68,6 +70,14 @@ app.get('/status/confirmed', async (req,res)=>{
   }
 });
 
+app.get('/covid/timeline', async (req, resp)=>{
+
+  const url = '/timeline/BR';
+  const data = await api2.get(url);
+  return res.send(data);
+
+})
+
 app.get('/info', async (req,res)=>{
   
     response.send({
@@ -78,3 +88,9 @@ app.get('/info', async (req,res)=>{
     });
   
 });
+
+app.post("/savemedia", (req, res)=>{
+  _firebase.saveData(req.body, (err, data)=>{
+    res.send(data);
+  });
+})
