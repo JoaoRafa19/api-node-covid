@@ -72,7 +72,7 @@ app.get('/status/confirmed', async (req,res)=>{
 
 app.get('/covid/timeline', async (req, res)=>{
 
-  const url = '/timeline/BR';
+  const url = 'api/timeline/BR';
   const data = await api2.get(url);
   return res.send(data);
 
