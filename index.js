@@ -70,7 +70,7 @@ app.get('/status/confirmed', async (req,res)=>{
   }
 });
 
-app.get('/covid/timeline', async (req, resp)=>{
+app.get('/covid/timeline', async (req, res)=>{
 
   const url = '/timeline/BR';
   const data = await api2.get(url);
@@ -80,7 +80,7 @@ app.get('/covid/timeline', async (req, resp)=>{
 
 app.get('/info', async (req,res)=>{
   
-    response.send({
+    res.send({
       "title":"Covid 19 Status API",
       "powered_by":"Python/Flask",
       "description":"API for get covid19 status",
