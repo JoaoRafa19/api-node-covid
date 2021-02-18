@@ -2,9 +2,9 @@ const {format, subDays} = require('date-fns');
 const { response } = require('express');
 const express = require('express');
 const app = express();
-const api = require('./api');
+const api = require('./api/api');
 const cors = require('cors');
-const api2 = require('./api2');
+const api2 = require('./api/api2');
 const _firebase = require('./firebase/setData');
 
 
