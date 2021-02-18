@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 
-app.listen(process.env.PORT||3000, ()=>{
+app.listen(process.env.PORT ||3000, ()=>{
   console.log('servidor rodando');
 });
 
@@ -75,7 +75,7 @@ app.get('/covid/timeline', async (req, res)=>{
 
   try{const url = 'api/timeline/BR';
   const data = await api2.get(url);
-  return res.send(data);  }catch(e){
+  return res.send(data.data);  }catch(e){
     return res.send({erro:e.message});
   }
 
