@@ -38,7 +38,6 @@ app.get('/covid/status', async (req,res)=>{
     const today = format(new Date(), 'yyyy-dd-MM');
     const uri = `total/country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`;
     const {data}= await api.get(uri);
-    console.log(data);
     return res.send(data);
   }catch(e){
     res.send({erro:e.message});
@@ -47,14 +46,16 @@ app.get('/covid/status', async (req,res)=>{
 
 app.get('/covid/lasttwoweaks', async (req,res)=>{
   
-    const date = format(subDays(new Date(), 14), 'yyyy-dd-MM');
+    try{const date = format(subDays(new Date(), 14), 'yyyy-dd-MM');
     const today = format(new Date(), 'yyyy-dd-MM');
     const uri = `country/brazil?from=${date}T00:00:00Z&to=${today}T00:00:00Z`
     const {data}= await api.get(uri);
     
     return res.send(data);
 
- 
+ }catch(e){
+   return res.send({erro:e.message})
+ }
 });
 
 
@@ -72,9 +73,11 @@ app.get('/status/confirmed', async (req,res)=>{
 
 app.get('/covid/timeline', async (req, res)=>{
 
-  const url = 'api/timeline/BR';
+  try{const url = 'api/timeline/BR';
   const data = await api2.get(url);
-  return res.send(data);
+  return res.send(data);  }catch(e){
+    return res.send({erro:e.message});
+  }
 
 })
 
